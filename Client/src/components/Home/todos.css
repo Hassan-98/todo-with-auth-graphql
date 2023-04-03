@@ -128,3 +128,27 @@
   color: #888;
   font-size: 30px;
 }
+
+.pagination {
+  margin: 30px 15px 0;
+}
+
+.pagination button {
+  border-radius: 0;
+  padding: 10px 15px;
+  background-color: #161515;
+  border-color: #161515;
+}
+
+.pagination button:hover {
+  background-color: #646cff;
+}
+
+.pagination button:disabled:hover {
+  background-color: #161515;
+  cursor: unset;
+}
+
+.pagination button.active {
+  background-color: #646cff;
+}

@@ -9,11 +9,10 @@ import Todos from '../components/Home/Todos';
 //= API
 import api from '../helpers/axios';
 //= Types
-import { UserTypes } from '../types';
+import { UserTypes, TodoTypes } from '../types';
 
 function App() {
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>("");
+  const [isEditMode, setIsEditMode] = useState<TodoTypes.Todo | false>(false);
   const navigate = useNavigate();
   const currentUser = useLoaderData() as UserTypes.User;
 
@@ -47,8 +46,8 @@ function App() {
         }
       </p>
       <hr />
-      <TodoForm isEditMode={isEditMode} setIsEditMode={setIsEditMode} inputValue={inputValue} setInputValue={setInputValue} currentUser={currentUser} />
-      <Todos setIsEditMode={setIsEditMode} setInputValue={setInputValue} />
+      <TodoForm isEditMode={isEditMode} setIsEditMode={setIsEditMode} currentUser={currentUser} />
+      <Todos setIsEditMode={setIsEditMode} />
     </div>
   )
 }

@@ -4,8 +4,8 @@ import { expressMiddleware } from '@apollo/server/express4';
 import { UserQueryResolvers, UserMutationResolvers } from '../components/User/user.resolvers';
 import { TodoQueryResolvers, TodoMutationResolvers } from '../components/Todo/todo.resolvers';
 //= TypeDefs
-import { UserType, UserInputs, UserQueries, UserMutations } from '../components/User/user.types';
-import { TodoType, TodoInputs, TodoQueries, TodoMutations } from '../components/Todo/todo.types';
+import { UserType, UserInputs, UserQueries, UserMutations } from '../components/User/user.typedefs';
+import { TodoType, TodoInputs, TodoQueries, TodoMutations } from '../components/Todo/todo.typedefs';
 
 const typeDefs = `#graphql
   # USERs
