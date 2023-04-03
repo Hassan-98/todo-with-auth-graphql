@@ -13,9 +13,10 @@ function SignupForm() {
     const username = document.querySelector<HTMLInputElement>('#username')!.value;
     const email = document.querySelector<HTMLInputElement>('#email')!.value;
     const password = document.querySelector<HTMLInputElement>('#password')!.value;
+    const confirmPassword = document.querySelector<HTMLInputElement>('#confirm-password')!.value;
 
     try {
-      const res = await Signup({ username, email, password });
+      const res = await Signup({ username, email, password, confirmPassword });
       if (res) navigate('/');
     } catch (error: any) {
       if (error.response?.data) toast.error(error.response.data.message);
@@ -34,6 +35,9 @@ function SignupForm() {
       </div>
       <div className="input">
         <input type="password" placeholder="Password" id="password" />
+      </div>
+      <div className="input">
+        <input type="password" placeholder="Confirm Password" id="confirm-password" />
       </div>
       <div className="button">
         <button onClick={handleSignup}>Signup</button>

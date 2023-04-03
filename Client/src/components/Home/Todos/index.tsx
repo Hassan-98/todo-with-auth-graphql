@@ -29,21 +29,24 @@ function Todos({ setIsEditMode }: IProps) {
       {loading && <div className="loading" />}
       {error && <p>{error.message}</p>}
       {
-        todos?.length && todos.map((todo: TodoTypes.Todo) =>
+        todos?.length ? todos.map((todo: TodoTypes.Todo) =>
           <Todo setIsEditMode={setIsEditMode} data={todo} key={todo._id} />
-        )
+        ) : null
       }
       {
         !loading && !loading && !todos?.length &&
         <p className="no-todos">No TODOs Yet</p>
       }
-      <div className="pagination">
-        <button className="page-btn" disabled={currentPage === 1} onClick={goToPrevPage}>&lt;&lt;</button>
-        {new Array(pagesCount).fill(0).map((_, i) =>
-          <button className={`page-btn ${currentPage === i + 1 ? 'active' : ''}`} key={i} onClick={() => goToPage(i + 1)}>{i + 1}</button>
-        )}
-        <button className="page-btn" disabled={currentPage === pagesCount} onClick={goToNextPage}>&gt;&gt;</button>
-      </div>
+      {
+        todos?.length ?
+          <div className="pagination">
+            <button className="page-btn" disabled={currentPage === 1} onClick={goToPrevPage}>&lt;&lt;</button>
+            {new Array(pagesCount).fill(0).map((_, i) =>
+              <button className={`page-btn ${currentPage === i + 1 ? 'active' : ''}`} key={i} onClick={() => goToPage(i + 1)}>{i + 1}</button>
+            )}
+            <button className="page-btn" disabled={currentPage === pagesCount} onClick={goToNextPage}>&gt;&gt;</button>
+          </div> : null
+      }
     </div>
   )
 }

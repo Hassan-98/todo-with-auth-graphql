@@ -12,6 +12,14 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <ApolloProvider client={client}>
     <RouterProvider router={router} />
-    <Toaster position="top-right" gutter={8} />
+    <Toaster
+      position="top-right"
+      gutter={8}
+      toastOptions={{
+        style: {
+          textAlign: 'left'
+        },
+      }}
+    />
   </ApolloProvider>
 )

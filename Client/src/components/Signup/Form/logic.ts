@@ -9,9 +9,12 @@ import { GET_TODOS } from "../../../graphql/queries";
 //= API
 import api from '../../../helpers/axios';
 
-export async function Signup(data: { username: string; email: string, password: string; }) {
+export async function Signup(data: { username: string; email: string; password: string; confirmPassword: string; }) {
   const validation_check = SignupSchema.safeParse(data);
-  if (!validation_check.success) return toast.error(validation_check.error.issues.map((issue: any) => `${issue.path.join('.')}: ${issue.message}`).join(' -&- '));
+  if (!validation_check.success) {
+    toast.error(validation_check.error.issues.map((issue: any) => `- ${issue.path.join('.')} ${issue.message}`).join(' \n '));
+    return false;
+  }
 
   try {
     const res = await api.post('/auth/signup', data);
@@ -25,5 +28,6 @@ export async function Signup(data: { username: string; email: string, password: 
   } catch (err: any) {
     if (err.response?.data?.success === false) toast.error(err.response.data.message);
     else toast.error(err.message);
+    return false;
   }
 }
