@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div className="card">
-      <h1>(GraphQL) TODO</h1>
+      <h1>My Tasks</h1>
       <p className="auth">
         {
           currentUser &&

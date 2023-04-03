@@ -1,9 +1,9 @@
 //= Modules
 import toast from "react-hot-toast";
 //= Queries
-import { GET_TODOS } from "../../../graphql/queries";
+import { GET_TODOS } from "../../../../graphql/queries";
 //= Types
-import { TodoTypes } from "../../../types";
+import { TodoTypes } from "../../../../types";
 
 export async function executeUpdateTodoCompletion(mutation: Function, data: TodoTypes.Todo) {
   const result = await mutation({

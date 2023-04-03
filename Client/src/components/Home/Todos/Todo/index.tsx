@@ -3,11 +3,11 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import Swal from 'sweetalert2';
 //= Mutations Queries
-import { UPDATE_TODO_COMPLETION, DELETE_TODO } from "../../../graphql/queries";
+import { UPDATE_TODO_COMPLETION, DELETE_TODO } from "../../../../graphql/queries";
 //= Mutations
 import { executeUpdateTodoCompletion, executeDeleteTodo } from './logic';
 //= Types
-import { TodoTypes } from '../../../types';
+import { TodoTypes } from '../../../../types';
 
 interface IProps {
   setIsEditMode: React.Dispatch<React.SetStateAction<TodoTypes.Todo | false>>;

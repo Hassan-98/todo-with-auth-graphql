@@ -6,6 +6,12 @@
   display: flex;
 }
 
+@media screen and (max-width: 400px) {
+  #root {
+    padding: 0.8rem;
+  }
+}
+
 .card {
   margin: 0 auto;
   width: 60%;
@@ -23,6 +29,7 @@
 @media screen and (max-width: 768px) {
   .card {
     width: 100%;
+    padding: 1rem;
   }
 }
 
@@ -34,13 +41,13 @@
 .card i {
   cursor: pointer;
   margin: 0 10px;
-  font-size: 20px;
+  font-size: 18px;
   position: relative;
   top: 2px;
 }
 
 .card .username {
-  font-size: 24px;
+  font-size: 22px;
   margin-right: 5px;
 }
 
@@ -70,6 +77,16 @@
   outline: none;
 }
 
+@media (max-width: 768px) {
+  .card input {
+    font-size: 14px;
+  }
+
+  .card button {
+    font-size: 14px;
+  }
+}
+
 .card .todos {
   border-top: 1px solid #1a1a1a;
   margin-top: 20px;
@@ -81,12 +98,35 @@
   border-bottom: 1px solid #1a1a1a;
 }
 
+@media (max-width: 768px) {
+  .card .todos .todo {
+    flex-wrap: wrap;
+    padding: 15px 0;
+  }
+}
+
 .card .todos .todo p {
   flex: 1;
   text-align: left;
   padding-right: 15px;
   color: #aaa;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .card .todos .todo p {
+    font-size: 15px;
+    width: 100%;
+    flex: unset;
+    margin: 5px 0;
+  }
+}
+
+.card .todos .todo p:before {
+  content: "Ξ  ";
+  font-size: 15px;
+  color: #707070;
+  margin-right: 10px;
 }
 
 .card .todos .todo p.todo-completed {
@@ -96,13 +136,32 @@
 
 .card .todos .todo .actions span {
   border: 1px solid #1a1a1a;
-  padding: 5px 5px 2px;
+  padding: 5px;
   cursor: pointer;
   margin: 0 2px;
   border-radius: 5px;
   display: inline-block;
   transition: all 0.3s;
   background-color: #161515;
+}
+
+.card .todos .todo .actions span i {
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .card .todos .todo .actions {
+    width: 100%;
+    text-align: right;
+  }
+
+  .card .todos .todo .actions span {
+    padding: 2px;
+  }
+
+  .card .todos .todo .actions span i {
+    font-size: 13px;
+  }
 }
 
 .card .todos .todo .actions span:first-of-type {
@@ -135,9 +194,18 @@
 
 .pagination button {
   border-radius: 0;
-  padding: 10px 15px;
+  padding: 10px 18px;
   background-color: #161515;
   border-color: #161515;
+  font-size: 15px;
+}
+
+.pagination button:first-of-type {
+  border-radius: 10px 0 0 10px;
+}
+
+.pagination button:last-of-type {
+  border-radius: 0 10px 10px 0;
 }
 
 .pagination button:hover {
@@ -151,4 +219,30 @@
 
 .pagination button.active {
   background-color: #646cff;
+}
+
+.loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 5px;
+  background: rgba(130, 130, 130, 0.2);
+  background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(130, 130, 130, 0.2)), color-stop(18%, rgba(130, 130, 130, 0.3)), color-stop(33%, rgba(130, 130, 130, 0.2)));
+  background: linear-gradient(to right, rgba(130, 130, 130, 0.2) 8%, rgba(130, 130, 130, 0.3) 18%, rgba(130, 130, 130, 0.2) 33%);
+  background-size: 800px 100px;
+  animation: wave-squares 2s infinite linear;
+}
+
+
+@keyframes wave-squares {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
 }
