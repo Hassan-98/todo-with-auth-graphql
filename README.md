@@ -8,11 +8,15 @@ Use the package manager npm or yarn to install deps.
 
 ```bash
 cd client && yarn install 
+```
+```bash
 cd server && yarn install 
 ```
 or
 ```bash
 cd client && npm install 
+```
+```bash
 cd server && npm install 
 ```
 
@@ -21,12 +25,14 @@ cd server && npm install
 To start the application you need to run the server and the client seprataly
 ```bash
 cd client && yarn dev
+```
+```bash
 cd server && yarn dev
 ```
 
 ## Built With
-*Server* : Nodejs - Express - MongoDB - GraphQL - TypeScript
-*Client* : React 18 - GraphQL - TypeScript
+- *Server* : Nodejs - Express - MongoDB - GraphQL - TypeScript
+- *Client* : React 18 - GraphQL - TypeScript
 
 ## Contributing
 

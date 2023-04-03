@@ -1,2 +1,1 @@
-# Nodejs-Express-Mongoose-TypeScript
-A Boilerplate for backend api based on Nodejs - Express - MongoDB(Mongoose) - TypeScript
+# Server side for Todo app with Node.js Express TypeScript GraphQL
