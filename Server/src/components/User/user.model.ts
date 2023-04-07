@@ -27,6 +27,12 @@ const UserSchema = new mongoose.Schema({
     required: [true, errorMessages.REQUIRED('password')],
     minlength: [6, errorMessages.TOO_SHORT('password', 6)]
   },
+  picture: {
+    type: String,
+    validate(picture: string) {
+      if (!validator.isURL(picture)) throw HttpError(400, errorMessages.NOT_VALID('picture'))
+    }
+  },
   todos: [
     {
       type: mongoose.Types.ObjectId,

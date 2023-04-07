@@ -4,6 +4,7 @@ export const UserType = `#graphql
     username: String!
     email: String!
     password: String!
+    picture: String
     todos: [Todo]
   }
 `;
@@ -21,6 +22,9 @@ export const UserInputs = `#graphql
   input UpdateUserInput {
     username: String
     email: String
+    currentPassword: String
+    newPassword: String
+    picture: Upload
   }
 `;
 

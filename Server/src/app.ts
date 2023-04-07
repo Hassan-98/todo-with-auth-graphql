@@ -9,6 +9,7 @@ import logger from 'morgan';
 import cors, { CorsOptions, CorsRequest } from 'cors';
 //= GraphQL
 import initializeGraphQL from './graphql';
+import { graphqlUploadExpress } from 'graphql-upload-ts';
 //= Router
 import { AppRouter } from './router/AppRouter';
 import './components/Root/root.controller';
@@ -62,6 +63,7 @@ class App {
     this.app.use(express.json({ limit: '50mb' }));
     this.app.use(express.urlencoded({ limit: '50mb', extended: true }));
     // GraphQL
+    this.app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }))
     this.app.use('/graphql', await initializeGraphQL())
   }
 

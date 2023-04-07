@@ -1,0 +1,45 @@
+.auth-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f1f1f;
+  margin: 0 auto;
+  width: 60%;
+  padding: 10px 35px;
+  border-radius: 15px 15px 0 0;
+  border-bottom: 2px solid #333333;
+}
+
+.auth-info .user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-info img {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #414141;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.auth-info p {
+  font-size: 20px;
+  text-transform: capitalize;
+  margin-inline-end: 5px;
+  cursor: pointer;
+}
+
+.auth-info i {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 20px;
+}
+
+.auth-info i:hover {
+  color: #810707;
+}

@@ -9,7 +9,7 @@ function useTodosLogic() {
   const [filters, setFilters] = useState<{ limit: number; skip: number; }>({ limit: PER_PAGE, skip: 0 });
   const [pagesCount, setPagesCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const { loading, error, data, fetchMore } = useQuery(GET_TODOS, { variables: { filters } });
+  const { loading, error, data, fetchMore } = useQuery(GET_TODOS, { variables: { filters }, ssr: true });
 
   async function goToPage(pageToGo: number) {
     setCurrentPage(pageToGo);

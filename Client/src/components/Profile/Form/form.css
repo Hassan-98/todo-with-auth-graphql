@@ -1,0 +1,75 @@
+.profile {
+  width: 100%;
+}
+
+.profile-form {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  background-color: #1f1f1f;
+  margin: 0 auto;
+  width: 60%;
+  padding: 30px 35px;
+  border-radius: 0 0 15px 15px;
+  text-align: left;
+}
+
+.profile-form .group {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.profile-form .group:not(:last-of-type) {
+  border-bottom: 1px solid #444;
+}
+
+.profile-form .group:not(:first-of-type) {
+  padding-top: 25px;
+}
+
+.profile-form .input {
+  width: 100%;
+}
+
+.profile-form .input label {
+  display: block;
+  width: 100%;
+}
+
+.profile-form .input input {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  outline: none;
+  margin: 5px 0 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.profile-form button {
+  padding: 12px 35px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  margin-bottom: 25px;
+  margin-top: 0;
+}
+
+.profile-form .picture {
+  width: 100%;
+  margin: 10px auto;
+}
+
+.profile-form img {
+  width: 150px;
+  height: 150px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 2px solid #444;
+  object-fit: cover;
+}

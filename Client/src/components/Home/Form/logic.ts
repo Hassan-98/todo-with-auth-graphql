@@ -48,8 +48,7 @@ export async function EditTodo(mutation: Function, data: z.infer<typeof UpdateTo
           content: data.content
         },
         updateTodoId: data._id,
-      },
-      refetchQueries: [GET_TODOS]
+      }
     });
 
     if (result.errors) return toast.error(result.errors[0].message);

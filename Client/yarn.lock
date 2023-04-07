@@ -10,7 +10,7 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@apollo/client@^3.7.11":
+"@apollo/client@^3.7.0", "@apollo/client@^3.7.11":
   version "3.7.11"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.7.11.tgz#fbe9ac3cd508123aacae370dfb3d268fd74f3a44"
   integrity sha512-uLg2KtxoAyj9ta7abLxXx8cGRM7HypCkXVmxtL7Ko//N5g37aoJ3ca7VYoFCMUFO1BXBulj+yKVl0U3+ILj5AQ==
@@ -389,6 +389,20 @@
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.5.0.tgz#57618e57942a5f0131374a9fdb0167e25a117fdc"
   integrity sha512-bkUDCp8o1MvFO+qxkODcbhSqRa6P2GXgrGZVpt0dCXNW2HCSCqYI0ZoAqEOSAjRWmmlKcYgFvN4B4S+zo/f8kg==
 
+"@types/apollo-upload-client@^17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@types/apollo-upload-client/-/apollo-upload-client-17.0.2.tgz#15dc737663928be27c768117603dfc23c21514bb"
+  integrity sha512-NphAiBqzZv3iY8Cq+qWyi0QUFFzJ+nVd7QKI/iKV8RfILrpYDL69F/vlhjn4BNxKlmc3LxJHymcf3gFzLBwuZQ==
+  dependencies:
+    "@apollo/client" "^3.7.0"
+    "@types/extract-files" "*"
+    graphql "14 - 16"
+
+"@types/extract-files@*":
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/@types/extract-files/-/extract-files-8.1.1.tgz#11b67e795ad2c8b483431e8d4f190db2fd22944b"
+  integrity sha512-dMJJqBqyhsfJKuK7p7HyyNmki7qj1AlwhUKWx6KrU7i1K2T2SPsUsSUTWFmr/sEM1q8rfR8j5IyUmYrDbrhfjQ==
+
 "@types/node@^18.15.11":
   version "18.15.11"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.11.tgz#b3b790f09cb1696cffcec605de025b088fa4225f"
@@ -458,6 +472,13 @@ ansi-styles@^3.2.1:
   integrity sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==
   dependencies:
     color-convert "^1.9.0"
+
+apollo-upload-client@^17.0.0:
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/apollo-upload-client/-/apollo-upload-client-17.0.0.tgz#d9baaff8d14e54510de9f2855b487e75ca63b392"
+  integrity sha512-pue33bWVbdlXAGFPkgz53TTmxVMrKeQr0mdRcftNY+PoHIdbGZD0hoaXHvO6OePJAkFz7OiCFUf98p1G/9+Ykw==
+  dependencies:
+    extract-files "^11.0.0"
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -581,6 +602,11 @@ escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==
 
+extract-files@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/extract-files/-/extract-files-11.0.0.tgz#b72d428712f787eef1f5193aff8ab5351ca8469a"
+  integrity sha512-FuoE1qtbJ4bBVvv94CC7s0oTnKUGvQs+Rjf1L2SJFfS+HTVVjhPFtehPdQ0JiGPqVNfSSZvL5yzHHQq2Z4WNhQ==
+
 follow-redirects@^1.15.0:
   version "1.15.2"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
@@ -627,7 +653,7 @@ graphql-tag@^2.12.6:
   dependencies:
     tslib "^2.1.0"
 
-graphql@^16.6.0:
+"graphql@14 - 16", graphql@^16.6.0:
   version "16.6.0"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.6.0.tgz#c2dcffa4649db149f6282af726c8c83f1c7c5fdb"
   integrity sha512-KPIBPDlW7NxrbT/eh4qPXz5FiFdL5UbaA0XUNz2Rp3Z3hqBSkbj0GVjwFDztsWVauZUWsbKHgMg++sk8UX0bkw==
