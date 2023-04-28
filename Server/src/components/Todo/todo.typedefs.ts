@@ -6,7 +6,7 @@ export const TodoType = `#graphql
     author: User
   }
   type TodosResponse {
-    data: [Todo]
+    items: [Todo]
     count: Int
   }
 `;
@@ -20,15 +20,16 @@ export const TodoInputs = `#graphql
     content: String
     isCompleted: Boolean
   }
-  input TodoFilters {
-    search: String
+  input TodoQuery {
     limit: Int
     skip: Int
+    filter: String
+    sort: String
   }
 `;
 
 export const TodoQueries = `#graphql
-  todos(filters: TodoFilters): TodosResponse
+  todos(query: TodoQuery): TodosResponse
   todo(id: ID!): Todo
 `;
 

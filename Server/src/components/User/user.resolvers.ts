@@ -1,10 +1,7 @@
-import { Request } from 'express';
 import CryptoJS from 'crypto-js';
 import path from 'path';
 import { createWriteStream } from 'fs';
 import { finished } from 'stream/promises';
-//= Models
-import USER from './user.model';
 //= Config
 import ConfigVars from '../../configs/app.config';
 //= Handler
@@ -15,31 +12,31 @@ import { shouldBeAuthenticated } from '../Auth/auth.middleware';
 import { UpdatePasswordSchema } from './user.validation';
 //= Types
 import { User } from './user.types';
+import { Context } from '../../types';
 
 const Config = ConfigVars();
-interface ExtendedRequest extends Request {
-  user: User
-}
 
 export const UserQueryResolvers = {
   /***********************
    * Get USERs Resolver
    */
-  users: ResolverHandler(async ({ filters }: UsersParams) => {
+  users: ResolverHandler<User[]>(async ({ filters }: UsersParams, { USER }: Context) => {
     return await USER.find({}, { ...(filters.limit ? { limit: filters.limit } : {}), ...(filters.skip ? { skip: filters.skip } : {}) }).populate('todos').lean();
   }),
   /***********************
    * Get USER by id Resolver
    */
-  user: ResolverHandler(async ({ id }: UserParams) => {
-    const user = await USER.findById(id).populate('todos').lean();
+  user: ResolverHandler<User>(async ({ id }: UserParams, { USER }: Context) => {
+    const user: User = await USER.findById(id).populate('todos').lean();
+    if (!user) throw new Error("User not found");
     return user;
   }),
   /***********************
    * Get USER by id Resolver
    */
-  currentUser: ResolverHandler(async (_: any, req: ExtendedRequest) => {
-    const user = await USER.findById(req.user._id).populate('todos').lean();
+  currentUser: ResolverHandler<User>(async (_: any, { req, USER }: Context) => {
+    const user: User = await USER.findById(req.user._id).populate('todos').lean();
+    if (!user) throw new Error("There are no logged in users");
     return user;
   }, [shouldBeAuthenticated]),
 }
@@ -48,13 +45,13 @@ export const UserMutationResolvers = {
   /***********************
    * Add USER Resolver
    */
-  addUser: ResolverHandler(async ({ data }: AddUserParams) => {
+  addUser: ResolverHandler<User>(async ({ data }: AddUserParams, { USER }: Context) => {
     return await USER.create(data);
   }),
   /**************************
    * Update TODO Resolver
    */
-  updateUserData: ResolverHandler(async ({ id, data }: UpdateUserParams) => {
+  updateUserData: ResolverHandler<User>(async ({ id, data }: UpdateUserParams, { USER }: Context) => {
     let user: User | null = await USER.findById(id);
     if (!user) throw new Error('User not found');
 
@@ -83,6 +80,7 @@ export const UserMutationResolvers = {
     }
 
     user = await USER.findByIdAndUpdate(id, updates, { new: true }).populate('todos').lean();
+    if (!user) throw new Error('User not found');
     return user;
   }),
 }

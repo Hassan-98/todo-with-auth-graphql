@@ -1,37 +1,34 @@
-//= Models
-import TODO from './todo.model';
-import USER from '../User/user.model';
-//= Types
-import { Todo } from './todo.types';
-import { ExtendedRequest } from '../../types/request.type';
+//= Utils
+import filtersParser from '../../utils/filtersParser';
 //= Handler
 import ResolverHandler from '../../graphql/resolver.handler';
 //= Middlewares
 import { shouldBeAuthenticated } from '../Auth/auth.middleware';
+//= Types
+import { Context } from '../../types';
+import { Todo } from './todo.types';
+
+/**
+ * TODO: add validation for CRUD operations (maybe a validation middleware)
+ */
 
 
 export const TodoQueryResolvers = {
   /***********************
    * Get TODOs Resolver
    */
-  todos: ResolverHandler(async ({ filters }: GetTodosParams, req: ExtendedRequest) => {
-    const query = {
-      author: req.user._id,
-      ...(filters?.search ? { content: { $regex: filters.search, $options: 'i' } } : {})
-    }
-    const options = {
-      ...(filters?.limit ? { limit: filters.limit } : {}),
-      ...(filters?.skip ? { skip: filters.skip } : {}),
-      sort: { createdAt: -1 }
-    }
-    const todos = await TODO.find(query, null, options).populate('author');
-    const count = await TODO.count(query);
-    return { data: todos, count }
+  todos: ResolverHandler<{ items: Todo[], count: number }>(async ({ query: filterQuery }: GetTodosParams, { req, TODO }: Context) => {
+    const parsedQuery = filtersParser(filterQuery);
+    const filter = { author: req.user._id, ...(parsedQuery.filters ? { ...parsedQuery.filters } : {}) };
+
+    const todos = await TODO.find(filter, null, parsedQuery.options).populate('author');
+    const count = await TODO.count(filter);
+    return { items: todos, count }
   }, [shouldBeAuthenticated]),
   /***********************
    * Get TODO by id Resolver
    */
-  todo: ResolverHandler(async ({ id }: GetTodoParams, req: ExtendedRequest) => {
+  todo: ResolverHandler<Todo>(async ({ id }: GetTodoParams, { req, TODO }: Context) => {
     const todo = await TODO.findOne({ _id: id, author: req.user._id }).populate('author');
     if (!todo) throw new Error(`Todo not found`);
     return todo
@@ -42,7 +39,7 @@ export const TodoMutationResolvers = {
   /***********************
    * Aad TODO Resolver
    */
-  addTodo: ResolverHandler(async ({ data }: AddTodoParams) => {
+  addTodo: ResolverHandler<Todo>(async ({ data }: AddTodoParams, { TODO, USER }: Context) => {
     const todo = await TODO.create({
       content: data.content,
       author: data.user
@@ -52,12 +49,14 @@ export const TodoMutationResolvers = {
         todos: todo._id
       }
     });
-    return await TODO.findById(todo._id).populate('author');
+    const populatedTodod = await TODO.findById(todo._id).populate('author');
+    if (!populatedTodod) throw new Error(`Todo not found`);
+    return populatedTodod;
   }, [shouldBeAuthenticated]),
   /**************************
    * Update TODO Resolver
    */
-  updateTodo: ResolverHandler(async ({ id, data }: UpdateTodoParams) => {
+  updateTodo: ResolverHandler<Todo>(async ({ id, data }: UpdateTodoParams, { TODO }: Context) => {
     const todo: Todo | null = await TODO.findByIdAndUpdate(id, data, { new: true }).populate('author');
     if (!todo) throw new Error(`Todo not found`);
     return todo;
@@ -65,7 +64,7 @@ export const TodoMutationResolvers = {
   /**************************
    * Remove TODO Resolver
    */
-  removeTodo: ResolverHandler(async ({ id }: RemoveTodoParams) => {
+  removeTodo: ResolverHandler<Todo>(async ({ id }: RemoveTodoParams, { TODO, USER }: Context) => {
     const todo: Todo | null = await TODO.findByIdAndDelete(id);
     if (!todo) throw new Error(`Todo not found`);
     await USER.findByIdAndUpdate(todo.author, {
@@ -83,10 +82,11 @@ export const TodoMutationResolvers = {
  * Types of parameters
 */
 type GetTodosParams = {
-  filters: {
-    search?: string;
+  query: {
     limit?: number;
     skip?: number;
+    filter: string;
+    sort: string;
   }
 }
 

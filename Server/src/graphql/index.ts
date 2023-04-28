@@ -6,7 +6,11 @@ import { UserQueryResolvers, UserMutationResolvers } from '../components/User/us
 import { TodoQueryResolvers, TodoMutationResolvers } from '../components/Todo/todo.resolvers';
 //= TypeDefs
 import { UserType, UserInputs, UserQueries, UserMutations } from '../components/User/user.typedefs';
-import { TodoType, TodoInputs, TodoQueries, TodoMutations } from '../components/Todo/todo.typedefs';
+import { TodoType, TodoInputs, TodoQueries, TodoMutations } from '../components/Todo/todo.typedefs';//= Models
+import USER from '../components/User/user.model';
+import TODO from '../components/Todo/todo.model';
+//= Types
+import { ExtendedRequest, Context } from '../types';
 
 const typeDefs = `#graphql
   scalar Upload
@@ -14,11 +18,6 @@ const typeDefs = `#graphql
   ${UserType} ${UserInputs}
   # TODOs
   ${TodoType} ${TodoInputs}
-
-  type Response {
-    success: Boolean!
-    message: String
-  }
 
   # Query
   type Query {
@@ -44,10 +43,6 @@ const resolvers = {
   }
 };
 
-interface Context {
-  req: Express.Request
-}
-
 const server = new ApolloServer<Context>({
   typeDefs,
   resolvers,
@@ -57,7 +52,11 @@ const server = new ApolloServer<Context>({
 const startGraphQL = async () => {
   await server.start();
   return expressMiddleware(server, {
-    context: async ({ req }: { req: Express.Request }) => ({ req })
+    context: async ({ req }) => ({
+      req: req as ExtendedRequest,
+      USER,
+      TODO
+    })
   })
 }
 

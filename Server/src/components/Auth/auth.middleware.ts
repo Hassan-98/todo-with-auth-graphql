@@ -54,7 +54,7 @@ export const NotAuthenticated = (req: ExtendedRequest, res: Response, next: Next
   }
 }
 
-export const shouldBeAuthenticated = async (req: ExtendedRequest) => {
+export const shouldBeAuthenticated = async ({ req }: { req: ExtendedRequest }) => {
   const JWT_Token = req.signedCookies['todo-login-session'];
   if (!JWT_Token) throw new Error(errorMessages.AUTH_REQUIRED);
 
